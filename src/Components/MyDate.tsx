@@ -1,3 +1,11 @@
+export interface Day {
+  isToday: boolean;
+  isSelected: boolean;
+  date: string;
+  weekday: string;
+  isChildfree: boolean;
+}
+
 export default class MyDate extends Date {
   weekday = [
     "Söndag",
