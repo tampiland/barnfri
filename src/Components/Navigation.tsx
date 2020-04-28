@@ -31,7 +31,7 @@ function Navigation(props: NavigationProps) {
           <InputGroup size='lg'>
             <InputGroup.Prepend>
               <Button
-                id='less'
+                id='decrease'
                 variant='secondary'
                 onClick={() => props.onSteps(-1)}>
                 -
@@ -45,7 +45,7 @@ function Navigation(props: NavigationProps) {
             />
             <InputGroup.Append>
               <Button
-                id='more'
+                id='increase'
                 variant='secondary'
                 onClick={() => props.onSteps(+1)}>
                 +
