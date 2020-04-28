@@ -48,7 +48,7 @@ function getHeader(date: MyDate): JSX.Element {
 }
 
 function getTable(timeSpan: Day[]): JSX.Element {
-  const reactobj = timeSpan.map((day) => (
+  const rows = timeSpan.map((day) => (
     <tr key={day.date} className={`${day.isSelected ? "border" : ""}`}>
       <td className={`${day.isToday ? "font-weight-bold" : ""}`}>{day.date}</td>
       <td className={`${day.isChildfree ? "text-success" : "text-danger"}`}>
@@ -58,8 +58,8 @@ function getTable(timeSpan: Day[]): JSX.Element {
   ));
 
   return (
-    <table className='w-75'>
-      <tbody>{reactobj}</tbody>
+    <table style={{ minWidth: "14em" }}>
+      <tbody>{rows}</tbody>
     </table>
   );
 }
