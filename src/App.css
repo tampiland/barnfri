@@ -1,17 +1,18 @@
 .App {
   text-align: center;
+  margin: 0;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: white;
-  padding: 10vh 0vh;
+  padding: 5vh 0vh;
 }
 
 td.date {
@@ -30,12 +31,15 @@ td.withchild {
   color: rgb(255, 80, 80);
 }
 
-td.today.date {
+td.eval.date {
   border: 1px solid white;
 }
 
+td.today.date {
+  font-weight: bold;
+}
+
 table td {
-  font-size: calc(10px + 1vmin);
   padding: 0px 5px;
 }
 
