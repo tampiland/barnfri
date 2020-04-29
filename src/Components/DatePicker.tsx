@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Navbar, Nav, FormControl, Button, InputGroup } from "react-bootstrap";
-import MyDate from "./MyDate";
+import MyDate from "../Modules/MyDate";
+import preventDoubleTapZoom from "../Modules/preventDoubleTapZoom";
 
 interface DatePickerProps {
   evalDate: MyDate;
@@ -10,6 +11,35 @@ interface DatePickerProps {
 }
 
 function DatePicker(props: DatePickerProps) {
+  const clickPlus = useRef<HTMLButtonElement | null>(null);
+  const clickMinus = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    // if (clickPlus.current != null) clickPlus.current.focus();
+    if (clickPlus.current != null) {
+      clickPlus.current.addEventListener(
+        "touchstart",
+        (event: any) => preventDoubleTapZoom(event),
+        {
+          passive: false,
+        }
+      );
+    }
+  }, [clickPlus]);
+
+  useEffect(() => {
+    // if (clickPlus.current != null) clickPlus.current.focus();
+    if (clickMinus.current != null) {
+      clickMinus.current.addEventListener(
+        "touchstart",
+        (event: any) => preventDoubleTapZoom(event),
+        {
+          passive: false,
+        }
+      );
+    }
+  }, [clickMinus]);
+
   return (
     <>
       <Navbar
@@ -28,8 +58,9 @@ function DatePicker(props: DatePickerProps) {
               <Button
                 id='decrease'
                 variant='secondary'
-                onClick={() => props.onSteps(-1)}>
-                -
+                onClick={() => props.onSteps(-1)}
+                ref={clickMinus as React.RefObject<any>}>
+                −
               </Button>
             </InputGroup.Prepend>
             <FormControl
@@ -42,7 +73,8 @@ function DatePicker(props: DatePickerProps) {
               <Button
                 id='increase'
                 variant='secondary'
-                onClick={() => props.onSteps(+1)}>
+                onClick={() => props.onSteps(+1)}
+                ref={clickPlus as React.RefObject<any>}>
                 +
               </Button>
             </InputGroup.Append>

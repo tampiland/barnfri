@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Col, Row, Alert } from "react-bootstrap";
-import MyDate from "./MyDate";
+import MyDate from "../Modules/MyDate";
 import { SettingsHelper, SettingsObject } from "../SettingsObject";
 
 interface Day {

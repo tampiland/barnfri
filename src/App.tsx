@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import MyDate from "./Components/MyDate";
+import MyDate from "./Modules/MyDate";
 import Navigation from "./Components/Navigation";
 import MainView from "./Components/MainView";
 import Settings from "./Components/Settings";
