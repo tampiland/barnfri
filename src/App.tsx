@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MyDate from "./Modules/MyDate";
 import Navigation from "./Components/Navigation";
+import Toolbar from "./Components/Toolbar";
 import MainView from "./Components/MainView";
 import Settings from "./Components/Settings";
 import DatePicker from "./Components/DatePicker";
@@ -36,7 +37,14 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
-        <Navigation />
+        <Navigation>
+          <DatePicker
+            evalDate={evalDate}
+            onChange={handleChange}
+            onSteps={handleSteps}
+            onReset={() => setEvalDate(new MyDate())}
+          />
+        </Navigation>
 
         <Switch>
           <Route
@@ -50,12 +58,14 @@ function App() {
             render={() => (
               <>
                 <MainView evalDate={evalDate} settings={settings} />
-                <DatePicker
-                  evalDate={evalDate}
-                  onChange={handleChange}
-                  onSteps={handleSteps}
-                  onReset={() => setEvalDate(new MyDate())}
-                />
+                <Toolbar>
+                  <DatePicker
+                    evalDate={evalDate}
+                    onChange={handleChange}
+                    onSteps={handleSteps}
+                    onReset={() => setEvalDate(new MyDate())}
+                  />
+                </Toolbar>
               </>
             )}
           />

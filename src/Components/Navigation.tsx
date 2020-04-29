@@ -4,19 +4,20 @@ import { LinkContainer } from "react-router-bootstrap";
 
 interface NavigationProps {}
 
-function Navigation(props: NavigationProps) {
+const Navigation: React.FC<NavigationProps> = (props) => {
   return (
-    <Navbar variant='dark' bg='dark'>
+    <Navbar variant='dark' bg='dark' className='justify-content-between'>
       <LinkContainer to='/'>
         <Navbar.Brand>Barnfri?</Navbar.Brand>
       </LinkContainer>
-      <Nav className='flex-grow-1 justify-content-end'>
+      <div className='d-none d-sm-flex'>{props.children}</div>
+      <Nav>
         <LinkContainer to='/settings'>
           <Nav.Link>Inställningar</Nav.Link>
         </LinkContainer>
       </Nav>
     </Navbar>
   );
-}
+};
 
 export default Navigation;
