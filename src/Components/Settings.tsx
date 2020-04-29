@@ -62,9 +62,7 @@ function Settings(props: SettingsProps) {
           <h3 className='mb-3'>Inställningar</h3>
         </Col>
       </Row>
-      <Container
-        className='p-2'
-        style={{ background: "lightgrey", borderRadius: "5px" }}>
+      <Container className='p-2 bg-light' style={{ borderRadius: "5px" }}>
         <Row className='mb-2'>
           <Col className='d-flex align-items-baseline justify-content-center flex-wrap'>
             <div>

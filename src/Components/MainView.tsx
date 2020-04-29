@@ -23,7 +23,7 @@ function MainView(props: MainViewProps) {
   maxDate.setDate(maxDate.getDate() + 365);
 
   function getTimeSpan(date: MyDate, today: MyDate): Day[] {
-    const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5];
+    const array = [-3, -2, -1, 0, 1, 2, 3, 4];
     const surrDates = array.map(
       (diff) => new MyDate(date.valueOf() + diff * 1000 * 3600 * 24)
     );
