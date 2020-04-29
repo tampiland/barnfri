@@ -91,8 +91,8 @@ function MainView(props: MainViewProps) {
         <Col
           xs={5}
           sm={4}
-          md={2}
-          lg={2}
+          md={3}
+          lg={3}
           xl={2}
           className={`p-0 ${day.isToday ? "font-weight-bold" : ""}`}>
           {day.date}
@@ -100,8 +100,8 @@ function MainView(props: MainViewProps) {
         <Col
           xs={5}
           sm={4}
-          md={2}
-          lg={2}
+          md={3}
+          lg={3}
           xl={2}
           className={`p-0 ${day.isChildfree ? "text-success" : "text-danger"}`}>
           {day.weekday}
@@ -113,11 +113,15 @@ function MainView(props: MainViewProps) {
   }
 
   return (
-    <Container
-      fluid
-      className='p-4 d-flex flex-column text-center align-items-center'>
-      {getHeader(evalDate)}
-      {getList(getTimeSpan(evalDate, todayDate))}
+    <Container fluid className='p-4'>
+      <Row className='justify-content-center align-items-center text-center'>
+        <Col xs={12} sm={5}>
+          {getHeader(evalDate)}
+        </Col>
+        <Col xs={12} sm={7}>
+          {getList(getTimeSpan(evalDate, todayDate))}
+        </Col>
+      </Row>
     </Container>
   );
 }
