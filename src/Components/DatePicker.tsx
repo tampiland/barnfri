@@ -15,16 +15,15 @@ function DatePicker(props: DatePickerProps) {
       <Navbar
         variant='dark'
         bg='dark'
-        expand='sm'
         fixed='bottom'
-        className='justify-content-around'>
-        <Nav className=''>
+        className='justify-content-around flex-wrap p-1'>
+        <Nav className='p-1'>
           <Button variant='secondary' size='lg' onClick={props.onReset}>
             Idag
           </Button>
         </Nav>
-        <Nav className=''>
-          <InputGroup size='lg'>
+        <Nav className='p-1'>
+          <InputGroup size='lg' className='flex-nowrap'>
             <InputGroup.Prepend>
               <Button
                 id='decrease'
@@ -37,8 +36,7 @@ function DatePicker(props: DatePickerProps) {
               type='date'
               value={props.evalDate.toLocaleDateString()}
               onChange={props.onChange}
-              style={{ width: "auto" }}
-              className='text-center'
+              style={{ minWidth: "auto", maxWidth: "11em" }}
             />
             <InputGroup.Append>
               <Button

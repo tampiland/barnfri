@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { SettingsHelper, SettingsObject } from "../SettingsObject";
 
@@ -24,7 +24,7 @@ function Settings(props: SettingsProps) {
 
   const handleSaveSettings = () => {
     if (
-      tempSettings.selectedWeekFetch == "samma" &&
+      tempSettings.selectedWeekFetch === "samma" &&
       SettingsHelper.weekdayOptions.indexOf(
         tempSettings.selectedWeekdayFetch
       ) <=
@@ -57,83 +57,99 @@ function Settings(props: SettingsProps) {
 
   return (
     <Container className='pt-4 d-flex flex-column text-center align-items-stretch'>
-      <h3 className='mb-3'>Inställningar</h3>
+      <Row>
+        <Col>
+          <h3 className='mb-3'>Inställningar</h3>
+        </Col>
+      </Row>
+      <Container
+        className='p-2'
+        style={{ background: "lightgrey", borderRadius: "5px" }}>
+        <Row className='mb-2'>
+          <Col className='d-flex align-items-baseline justify-content-center flex-wrap'>
+            <div>
+              <span>Lämnar barn</span>
+            </div>
+            <div>
+              <Form.Control
+                id='selectedWeekdayLeave'
+                value={tempSettings.selectedWeekdayLeave}
+                onChange={handleChange}
+                as='select'
+                style={{ width: "auto" }}
+                className='d-inline-block m-1 text-center text-lowercase'>
+                {_weekdayOptions.map((option, idx) => (
+                  <option key={idx} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Form.Control>
+              <Form.Control
+                id='selectedWeekLeave'
+                value={tempSettings.selectedWeekLeave}
+                onChange={handleChange}
+                as='select'
+                style={{ width: "auto" }}
+                className='d-inline-block m-1 text-center'>
+                {_weekLeaveOptions.map((option, idx) => (
+                  <option key={idx} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Form.Control>
+              <span>veckor</span>
+            </div>
+          </Col>
+        </Row>
 
-      <div className='mb-3'>
-        <span>Lämnar barn på</span>
-        <Form.Control
-          id='selectedWeekLeave'
-          value={tempSettings.selectedWeekLeave}
-          onChange={handleChange}
-          as='select'
-          style={{ width: "auto" }}
-          className='d-inline-block m-1 text-center'>
-          {_weekLeaveOptions.map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-        </Form.Control>
-        <span>veckor</span>
-      </div>
+        <Row className='mb-2'>
+          <Col className='d-flex align-items-baseline justify-content-center flex-wrap'>
+            <div>
+              <span>Hämtar barn</span>
+            </div>
+            <div>
+              <Form.Control
+                id='selectedWeekdayFetch'
+                value={tempSettings.selectedWeekdayFetch}
+                onChange={handleChange}
+                as='select'
+                style={{ width: "auto" }}
+                className='d-inline-block m-1 text-center text-lowercase'>
+                {_weekdayOptions.map((option, idx) => (
+                  <option key={idx} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Form.Control>
+              <Form.Control
+                id='selectedWeekFetch'
+                value={tempSettings.selectedWeekFetch}
+                onChange={handleChange}
+                as='select'
+                style={{ width: "auto" }}
+                className='d-inline-block m-1 text-center'>
+                {_weekFetchOptions.map((option, idx) => (
+                  <option key={idx} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Form.Control>
+              <span>vecka</span>
+            </div>
+          </Col>
+        </Row>
 
-      <div className='mb-3'>
-        <span>Är barnfri från</span>
-        <Form.Control
-          id='selectedWeekdayLeave'
-          value={tempSettings.selectedWeekdayLeave}
-          onChange={handleChange}
-          as='select'
-          style={{ width: "auto" }}
-          className='d-inline-block m-1 text-center text-lowercase'>
-          {_weekdayOptions.map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-        </Form.Control>
-      </div>
-
-      <div className='mb-3'>
-        <span>till</span>
-        <Form.Control
-          id='selectedWeekdayFetch'
-          value={tempSettings.selectedWeekdayFetch}
-          onChange={handleChange}
-          as='select'
-          style={{ width: "auto" }}
-          className='d-inline-block m-1 text-center text-lowercase'>
-          {_weekdayOptions.map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-        </Form.Control>
-
-        <Form.Control
-          id='selectedWeekFetch'
-          value={tempSettings.selectedWeekFetch}
-          onChange={handleChange}
-          as='select'
-          style={{ width: "auto" }}
-          className='d-inline-block m-1 text-center'>
-          {_weekFetchOptions.map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-        </Form.Control>
-        <span>vecka</span>
-      </div>
-
-      <div className='mt-3'>
-        <Button variant='primary' onClick={handleSaveSettings}>
-          Spara
-        </Button>{" "}
-        <Button variant='secondary' onClick={handleCancel}>
-          Ångra
-        </Button>
-      </div>
+        <Row>
+          <Col>
+            <Button variant='primary' onClick={handleSaveSettings}>
+              Spara
+            </Button>{" "}
+            <Button variant='secondary' onClick={handleCancel}>
+              Ångra
+            </Button>
+          </Col>
+        </Row>
+      </Container>
       {routeToMain && <Redirect to={"/"} />}
     </Container>
   );
