@@ -16,7 +16,7 @@ function DatePicker(props: DatePickerProps) {
         variant='dark'
         bg='dark'
         fixed='bottom'
-        className='justify-content-around flex-wrap p-1'>
+        className='justify-content-center flex-wrap p-1'>
         <Nav className='p-1'>
           <Button variant='secondary' size='lg' onClick={props.onReset}>
             Idag

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Alert } from "react-bootstrap";
+import { Container, Col, Row, Alert } from "react-bootstrap";
 import MyDate from "./MyDate";
 import { SettingsHelper, SettingsObject } from "../SettingsObject";
 
@@ -83,29 +83,41 @@ function MainView(props: MainViewProps) {
     );
   }
 
-  function getTable(timeSpan: Day[]): JSX.Element {
+  function getList(timeSpan: Day[]): JSX.Element {
     const rows = timeSpan.map((day) => (
-      <tr key={day.date} className={`${day.isSelected ? "border" : ""}`}>
-        <td className={`${day.isToday ? "font-weight-bold" : ""}`}>
+      <Row
+        key={day.date}
+        className={`justify-content-center ${day.isSelected ? "border" : ""}`}>
+        <Col
+          xs={5}
+          sm={4}
+          md={2}
+          lg={2}
+          xl={2}
+          className={`p-0 ${day.isToday ? "font-weight-bold" : ""}`}>
           {day.date}
-        </td>
-        <td className={`${day.isChildfree ? "text-success" : "text-danger"}`}>
+        </Col>
+        <Col
+          xs={5}
+          sm={4}
+          md={2}
+          lg={2}
+          xl={2}
+          className={`p-0 ${day.isChildfree ? "text-success" : "text-danger"}`}>
           {day.weekday}
-        </td>
-      </tr>
+        </Col>
+      </Row>
     ));
 
-    return (
-      <table style={{ minWidth: "14em" }}>
-        <tbody>{rows}</tbody>
-      </table>
-    );
+    return <Container>{rows}</Container>;
   }
 
   return (
-    <Container className='pt-4 d-flex flex-column text-center align-items-center'>
+    <Container
+      fluid
+      className='p-4 d-flex flex-column text-center align-items-center'>
       {getHeader(evalDate)}
-      {getTable(getTimeSpan(evalDate, todayDate))}
+      {getList(getTimeSpan(evalDate, todayDate))}
     </Container>
   );
 }
