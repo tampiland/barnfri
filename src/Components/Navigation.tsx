@@ -1,60 +1,21 @@
 import React from "react";
-import { Navbar, Nav, FormControl, Button, InputGroup } from "react-bootstrap";
-import MyDate from "./MyDate";
+import { Navbar, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
-interface NavigationProps {
-  evalDate: MyDate;
-  onChange: (event: any) => void;
-  onSteps: (event: any) => void;
-}
+interface NavigationProps {}
 
 function Navigation(props: NavigationProps) {
   return (
-    <>
-      <Navbar
-        variant='dark'
-        bg='dark'
-        expand='sm'
-        className='justify-content-between'>
-        <Navbar.Brand href='/'>Barnfri?</Navbar.Brand>
-        {/* <Nav className='justify-content-end'>
-          <Nav.Link href='#link'>Settings</Nav.Link>
-        </Nav> */}
-      </Navbar>
-      <Navbar
-        variant='dark'
-        bg='dark'
-        expand='sm'
-        fixed='bottom'
-        className='justify-content-center'>
-        <Nav className='justify-content-center'>
-          <InputGroup size='lg'>
-            <InputGroup.Prepend>
-              <Button
-                id='decrease'
-                variant='secondary'
-                onClick={() => props.onSteps(-1)}>
-                -
-              </Button>
-            </InputGroup.Prepend>
-            <FormControl
-              type='date'
-              value={props.evalDate.toLocaleDateString()}
-              onChange={props.onChange}
-              style={{ maxWidth: "11em" }}
-            />
-            <InputGroup.Append>
-              <Button
-                id='increase'
-                variant='secondary'
-                onClick={() => props.onSteps(+1)}>
-                +
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Nav>
-      </Navbar>
-    </>
+    <Navbar variant='dark' bg='dark' expand='sm'>
+      <LinkContainer to='/'>
+        <Navbar.Brand>Barnfri?</Navbar.Brand>
+      </LinkContainer>
+      <Nav className='justify-content-end'>
+        <LinkContainer to='/settings'>
+          <Nav.Link>Inställningar</Nav.Link>
+        </LinkContainer>
+      </Nav>
+    </Navbar>
   );
 }
 

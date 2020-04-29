@@ -1,20 +1,12 @@
-export interface Day {
-  isToday: boolean;
-  isSelected: boolean;
-  date: string;
-  weekday: string;
-  isChildfree: boolean;
-}
-
 export default class MyDate extends Date {
-  weekday = [
-    "Söndag",
+  private static weekdays = [
     "Måndag",
     "Tisdag",
     "Onsdag",
     "Torsdag",
     "Fredag",
     "Lördag",
+    "Söndag",
   ];
 
   // Returns the ISO week of the date.
@@ -38,23 +30,10 @@ export default class MyDate extends Date {
   }
 
   toWeekdayString() {
-    return this.weekday[this.getDay()];
+    return MyDate.weekdays[this.getWeekday()];
   }
 
-  getBarnfri() {
-    const dayOfWeek = (this.getDay() + 6) % 7; // make sunday = 6, not 0
-    const weekNumber = this.getWeek();
-    return (
-      (this.even(weekNumber) && dayOfWeek >= 3) ||
-      (this.odd(weekNumber) && dayOfWeek <= 2)
-    );
-  }
-
-  private odd(weekNumber: number) {
-    return !!(weekNumber % 2);
-  }
-
-  private even(weekNumber: number) {
-    return !this.odd(weekNumber);
+  getWeekday() {
+    return (this.getDay() + 6) % 7; // make sunday = 6, not 0
   }
 }
