@@ -12,6 +12,7 @@ import {
 interface MainViewProps {
   evalDate: MyDate;
   settings: SettingsObject;
+  onChange: (event: any) => void;
 }
 
 function MainView(props: MainViewProps) {
@@ -29,7 +30,7 @@ function MainView(props: MainViewProps) {
       : "danger";
 
     return (
-      <Alert variant={alertVariant} className='pt-3 pb-2'>
+      <Alert variant={alertVariant} className='pt-3 pb-2 m-4'>
         <h1>{title}</h1>
       </Alert>
     );
@@ -70,14 +71,16 @@ function MainView(props: MainViewProps) {
     today?: boolean;
     selected?: boolean;
     anotherMonth?: boolean;
+    value?: string;
+    onClick?: (event: any) => void;
   }
 
   const DayCol: React.FC<ColProps> = (props) => {
     const red = "#f8d7da";
     const green = "#d4edda";
     return (
-      <Button
-        as={Col}
+      <Col
+        as={Button}
         className={
           (props.today && " font-weight-bold ") +
           (props.selected
@@ -91,9 +94,13 @@ function MainView(props: MainViewProps) {
         style={{
           padding: "0.5em",
           backgroundColor: props.title ? "#fff" : props.childFree ? green : red,
+        }}
+        value={props.value}
+        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+          if (props.onClick) props.onClick(e);
         }}>
         {props.children}
-      </Button>
+      </Col>
     );
   };
 
@@ -106,7 +113,7 @@ function MainView(props: MainViewProps) {
 
     return (
       <Container>
-        <h3 className='pt-2'>{props.evalDate.toMonthString()}</h3>
+        <h3 className='mt-1'>{props.evalDate.toMonthString()}</h3>
         <Row>
           <DayCol title>M</DayCol>
           <DayCol title>T</DayCol>
@@ -128,7 +135,9 @@ function MainView(props: MainViewProps) {
                       childFree={day.isChildfree}
                       today={day.isToday}
                       selected={day.isSelected}
-                      anotherMonth={day.isAnotherMonth}>
+                      anotherMonth={day.isAnotherMonth}
+                      onClick={props.onChange}
+                      value={day.date.toLocaleDateString()}>
                       {day.date.getDate().toString()}
                     </DayCol>
                   );
@@ -141,7 +150,7 @@ function MainView(props: MainViewProps) {
   }
 
   return (
-    <Container fluid className='p-4'>
+    <Container fluid className='p-4r'>
       <Row className='justify-content-center align-items-center text-center'>
         <Col xs={12} sm={5}>
           {getHeader(evalDate)}

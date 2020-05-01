@@ -23,8 +23,11 @@ function App() {
 
   const handleSteps = (steps: number) => {
     if (steps) {
-      const date = new MyDate(evalDate);
-      date.setDate(date.getDate() + steps);
+      const date = new MyDate(
+        evalDate.getFullYear(),
+        evalDate.getMonth() + 1,
+        evalDate.getDate()
+      );
       setEvalDate(date);
     }
   };
@@ -57,7 +60,11 @@ function App() {
             path='/'
             render={() => (
               <>
-                <MainView evalDate={evalDate} settings={settings} />
+                <MainView
+                  evalDate={evalDate}
+                  settings={settings}
+                  onChange={handleChange}
+                />
                 <Toolbar>
                   <DatePicker
                     evalDate={evalDate}
