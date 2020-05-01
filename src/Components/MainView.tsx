@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Col, Row, Alert } from "react-bootstrap";
+import { Container, Col, Row, Alert, Button } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 import { SettingsObject } from "../Modules/SettingsObject";
 import {
@@ -65,8 +65,8 @@ function MainView(props: MainViewProps) {
   }
 
   interface ColProps {
-    //id: string;
-    childFree: boolean;
+    title?: boolean;
+    childFree?: boolean;
     today?: boolean;
     selected?: boolean;
     anotherMonth?: boolean;
@@ -76,19 +76,24 @@ function MainView(props: MainViewProps) {
     const red = "#f8d7da";
     const green = "#d4edda";
     return (
-      <Col
+      <Button
+        as={Col}
         className={
-          "border" +
           (props.today && " font-weight-bold ") +
-          (props.selected && " border-dark ") +
-          (props.anotherMonth && " text-muted font-italic ")
+          (props.selected
+            ? props.childFree
+              ? " border-success "
+              : " border-danger "
+            : " border-white ") +
+          (props.anotherMonth ? " text-light " : " text-dark ") +
+          ((props.anotherMonth || props.title) && " font-italic ")
         }
         style={{
           padding: "0.5em",
-          backgroundColor: props.childFree ? green : red,
+          backgroundColor: props.title ? "#fff" : props.childFree ? green : red,
         }}>
         {props.children}
-      </Col>
+      </Button>
     );
   };
 
@@ -100,31 +105,38 @@ function MainView(props: MainViewProps) {
       .map((_, idx) => start + idx);
 
     return (
-      <>
-        <h3 className='pt-2'>Månad</h3>
-        <Container className='small'>
-          {range.map((weekNo) => {
-            return (
-              <Row key={`week-${weekNo}`}>
-                {data
-                  .filter((day) => day.weekInMonth === weekNo)
-                  .map((day, idx) => {
-                    return (
-                      <DayCol
-                        key={`day-${idx}`}
-                        childFree={day.isChildfree}
-                        today={day.isToday}
-                        selected={day.isSelected}
-                        anotherMonth={day.isAnotherMonth}>
-                        {day.date.getDate().toString()}
-                      </DayCol>
-                    );
-                  })}
-              </Row>
-            );
-          })}
-        </Container>
-      </>
+      <Container>
+        <h3 className='pt-2'>{props.evalDate.toMonthString()}</h3>
+        <Row>
+          <DayCol title>M</DayCol>
+          <DayCol title>T</DayCol>
+          <DayCol title>O</DayCol>
+          <DayCol title>T</DayCol>
+          <DayCol title>F</DayCol>
+          <DayCol title>L</DayCol>
+          <DayCol title>S</DayCol>
+        </Row>
+        {range.map((weekNo) => {
+          return (
+            <Row key={`week-${weekNo}`}>
+              {data
+                .filter((day) => day.weekInMonth === weekNo)
+                .map((day, idx) => {
+                  return (
+                    <DayCol
+                      key={`day-${idx}`}
+                      childFree={day.isChildfree}
+                      today={day.isToday}
+                      selected={day.isSelected}
+                      anotherMonth={day.isAnotherMonth}>
+                      {day.date.getDate().toString()}
+                    </DayCol>
+                  );
+                })}
+            </Row>
+          );
+        })}
+      </Container>
     );
   }
 
