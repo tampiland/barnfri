@@ -140,8 +140,8 @@ function MainView(props: MainViewProps) {
           {getHeader(evalDate)}
         </Col>
         <Col xs={12} sm={7}>
-          {/* {getList(isChildFreeWeek(evalDate, todayDate, props.settings))} */}
-          {getMonth(isChildFreeWeek(evalDate, todayDate, props.settings))}
+          {getList(isChildFreeWeek(evalDate, todayDate, props.settings))}
+          {/* {getMonth(isChildFreeWeek(evalDate, todayDate, props.settings))} */}
         </Col>
       </Row>
     </Container>
