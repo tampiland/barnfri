@@ -78,8 +78,8 @@ function MainView(props: MainViewProps) {
       .map((_, idx) => start + idx);
 
     return (
-      <Container>
-        <h3 className='mt-1'>{props.evalDate.toMonthString()}</h3>
+      <Container className='mt-1 mb-1'>
+        <h3>{props.evalDate.toMonthString()}</h3>
         <Row>
           <DayCol title>M</DayCol>
           <DayCol title>T</DayCol>

@@ -25,7 +25,7 @@ function App() {
     if (steps) {
       const date = new MyDate(
         evalDate.getFullYear(),
-        evalDate.getMonth() + 1,
+        evalDate.getMonth() + steps,
         evalDate.getDate()
       );
       setEvalDate(date);
