@@ -50,27 +50,6 @@ export function isChildfree(date: MyDate, settings: SettingsObject): boolean {
     );
 }
 
-export function isChildFreeWeek(
-  date: MyDate,
-  today: MyDate,
-  settings: SettingsObject
-): Day[] {
-  const array = [-3, -2, -1, 0, 1, 2, 3, 4];
-  const surrDates = array.map(
-    (diff) => new MyDate(date.valueOf() + diff * 1000 * 3600 * 24)
-  );
-
-  const timeSpan: Day[] = surrDates.map((day) => ({
-    date: day,
-    isToday: !!(day.toLocaleDateString() === today.toLocaleDateString()),
-    isSelected: !!(day.toLocaleDateString() === date.toLocaleDateString()),
-    weekday: day.toWeekdayString(),
-    isChildfree: isChildfree(day, settings),
-  }));
-
-  return timeSpan;
-}
-
 export function isChildFreeMonth(
   date: MyDate,
   today: MyDate,

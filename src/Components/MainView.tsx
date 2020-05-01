@@ -2,12 +2,7 @@ import React from "react";
 import { Container, Col, Row, Alert, Button } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 import { SettingsObject } from "../Modules/SettingsObject";
-import {
-  Day,
-  isChildfree,
-  isChildFreeWeek,
-  isChildFreeMonth,
-} from "../Modules/ChildFree";
+import { Day, isChildfree, isChildFreeMonth } from "../Modules/ChildFree";
 
 interface MainViewProps {
   evalDate: MyDate;
@@ -34,35 +29,6 @@ function MainView(props: MainViewProps) {
         <h1>{title}</h1>
       </Alert>
     );
-  }
-
-  function getList(timeSpan: Day[]): JSX.Element {
-    const rows = timeSpan.map((day) => (
-      <Row
-        key={day.date.toLocaleDateString()}
-        className={`justify-content-center ${day.isSelected ? "border" : ""}`}>
-        <Col
-          xs={5}
-          sm={4}
-          md={3}
-          lg={3}
-          xl={2}
-          className={`p-0 ${day.isToday ? "font-weight-bold" : ""}`}>
-          {day.date.toLocaleDateString()}
-        </Col>
-        <Col
-          xs={5}
-          sm={4}
-          md={3}
-          lg={3}
-          xl={2}
-          className={`p-0 ${day.isChildfree ? "text-success" : "text-danger"}`}>
-          {day.weekday}
-        </Col>
-      </Row>
-    ));
-
-    return <Container>{rows}</Container>;
   }
 
   interface ColProps {
@@ -150,13 +116,12 @@ function MainView(props: MainViewProps) {
   }
 
   return (
-    <Container fluid className='p-4r'>
+    <Container fluid className=''>
       <Row className='justify-content-center align-items-center text-center'>
         <Col xs={12} sm={5}>
           {getHeader(evalDate)}
         </Col>
         <Col xs={12} sm={7}>
-          {/* {getList(isChildFreeWeek(evalDate, todayDate, props.settings))} */}
           {getMonth(isChildFreeMonth(evalDate, todayDate, props.settings))}
         </Col>
       </Row>
