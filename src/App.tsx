@@ -8,7 +8,7 @@ import Toolbar from "./Components/Toolbar";
 import MainView from "./Components/MainView";
 import Settings from "./Components/Settings";
 import DatePicker from "./Components/DatePicker";
-import { SettingsHelper, SettingsObject } from "./SettingsObject";
+import { SettingsHelper, SettingsObject } from "./Modules/SettingsObject";
 
 function App() {
   const [evalDate, setEvalDate] = useState<MyDate>(new MyDate());

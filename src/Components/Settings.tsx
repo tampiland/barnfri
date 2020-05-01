@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import { SettingsHelper, SettingsObject } from "../SettingsObject";
+import { SettingsHelper, SettingsObject } from "../Modules/SettingsObject";
 
 interface SettingsProps {
   settings: SettingsObject;
@@ -25,10 +25,8 @@ function Settings(props: SettingsProps) {
   const handleSaveSettings = () => {
     if (
       tempSettings.selectedWeekFetch === "samma" &&
-      SettingsHelper.weekdayOptions.indexOf(
-        tempSettings.selectedWeekdayFetch
-      ) <=
-        SettingsHelper.weekdayOptions.indexOf(tempSettings.selectedWeekdayLeave)
+      SettingsHelper.getWeekdayNum(tempSettings.selectedWeekdayFetch) <=
+        SettingsHelper.getWeekdayNum(tempSettings.selectedWeekdayLeave)
     ) {
       const fixedSettings = {
         ...tempSettings,

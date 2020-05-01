@@ -41,4 +41,8 @@ export class SettingsHelper {
   public static storeSettings(settings: SettingsObject) {
     localStorage.setItem("appSettings", JSON.stringify(settings));
   }
+
+  public static getWeekdayNum(weekday: string): number {
+    return this.weekdayOptions.indexOf(weekday);
+  }
 }
