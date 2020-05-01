@@ -8,6 +8,20 @@ export default class MyDate extends Date {
     "Lördag",
     "Söndag",
   ];
+  private static months = [
+    "Januari",
+    "Februari",
+    "Mars",
+    "April",
+    "Maj",
+    "Juni",
+    "Juli",
+    "Augusti",
+    "September",
+    "Oktober",
+    "November",
+    "December",
+  ];
 
   // Returns the ISO week of the date.
   getWeek() {
@@ -31,6 +45,10 @@ export default class MyDate extends Date {
 
   toWeekdayString() {
     return MyDate.weekdays[this.getWeekday()];
+  }
+
+  toMonthString() {
+    return MyDate.months[this.getMonth()];
   }
 
   getWeekday() {

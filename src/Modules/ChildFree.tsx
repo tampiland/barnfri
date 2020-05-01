@@ -2,10 +2,12 @@ import { SettingsObject, SettingsHelper } from "./SettingsObject";
 import MyDate from "./MyDate";
 
 export interface Day {
+  date: MyDate;
   isToday: boolean;
   isSelected: boolean;
-  date: string;
   weekday: string;
+  weekInMonth?: number;
+  isAnotherMonth?: boolean;
   isChildfree: boolean;
 }
 
@@ -59,9 +61,9 @@ export function isChildFreeWeek(
   );
 
   const timeSpan: Day[] = surrDates.map((day) => ({
+    date: day,
     isToday: !!(day.toLocaleDateString() === today.toLocaleDateString()),
     isSelected: !!(day.toLocaleDateString() === date.toLocaleDateString()),
-    date: day.toLocaleDateString(),
     weekday: day.toWeekdayString(),
     isChildfree: isChildfree(day, settings),
   }));
@@ -74,16 +76,46 @@ export function isChildFreeMonth(
   today: MyDate,
   settings: SettingsObject
 ): Day[] {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
   // figure out start date
   // (monday of the week determined by the first day of the month)
+  const firstDate = new MyDate(year, month, 1);
+  const offsetLower = -firstDate.getWeekday();
+  //const startDate = new MyDate(year, month, 1 + offsetLower);
+  //console.log(startDate);
 
   // figure out end date
   // (sunday of the week determined by the last day of the month)
+  const lastDate = new MyDate(year, month + 1, 0);
+  const offsetUpper = 6 - lastDate.getWeekday();
+  //const endDate = new MyDate(year, month + 1, 0 + offsetUpper);
+  //console.log(endDate);
 
   // generate array of MyDates from start to end
+  const start = 1 + offsetLower;
+  const end = lastDate.getDate() + offsetUpper;
+  const range = Array(end - start + 1)
+    .fill(0)
+    .map((_, idx) => start + idx);
+  //console.log(range);
 
   // generate Day struture using map function
   // (including week number to enable filtering and easy UI
+  const data: Day[] = range.map((range, idx) => {
+    const day = new MyDate(year, month, 0 + range);
 
-  return [];
+    return {
+      date: day,
+      isToday: !!(day.toLocaleDateString() === today.toLocaleDateString()),
+      isSelected: !!(day.toLocaleDateString() === date.toLocaleDateString()),
+      weekday: day.toWeekdayString(),
+      isAnotherMonth: day.getMonth() !== date.getMonth(),
+      weekInMonth: Math.floor(idx / 7),
+      isChildfree: isChildfree(day, settings),
+    };
+  });
+
+  return data;
 }

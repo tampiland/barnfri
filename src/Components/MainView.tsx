@@ -2,7 +2,12 @@ import React from "react";
 import { Container, Col, Row, Alert } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 import { SettingsObject } from "../Modules/SettingsObject";
-import { Day, isChildfree, isChildFreeWeek } from "../Modules/ChildFree";
+import {
+  Day,
+  isChildfree,
+  isChildFreeWeek,
+  isChildFreeMonth,
+} from "../Modules/ChildFree";
 
 interface MainViewProps {
   evalDate: MyDate;
@@ -33,7 +38,7 @@ function MainView(props: MainViewProps) {
   function getList(timeSpan: Day[]): JSX.Element {
     const rows = timeSpan.map((day) => (
       <Row
-        key={day.date}
+        key={day.date.toLocaleDateString()}
         className={`justify-content-center ${day.isSelected ? "border" : ""}`}>
         <Col
           xs={5}
@@ -42,7 +47,7 @@ function MainView(props: MainViewProps) {
           lg={3}
           xl={2}
           className={`p-0 ${day.isToday ? "font-weight-bold" : ""}`}>
-          {day.date}
+          {day.date.toLocaleDateString()}
         </Col>
         <Col
           xs={5}
@@ -60,74 +65,64 @@ function MainView(props: MainViewProps) {
   }
 
   interface ColProps {
+    //id: string;
+    childFree: boolean;
     today?: boolean;
-    anotherMonth?: Boolean;
+    selected?: boolean;
+    anotherMonth?: boolean;
   }
 
-  const ColRed: React.FC<ColProps> = (props) => {
+  const DayCol: React.FC<ColProps> = (props) => {
+    const red = "#f8d7da";
+    const green = "#d4edda";
     return (
       <Col
         className={
-          (!!props.today ? "border border-dark font-weight-bold" : "") +
-          (!!props.anotherMonth ? " text-muted" : "")
+          "border" +
+          (props.today && " font-weight-bold ") +
+          (props.selected && " border-dark ") +
+          (props.anotherMonth && " text-muted font-italic ")
         }
         style={{
           padding: "0.5em",
-          backgroundColor: "#f8d7da",
+          backgroundColor: props.childFree ? green : red,
         }}>
         {props.children}
       </Col>
     );
   };
 
-  const ColGreen: React.FC<ColProps> = (props) => {
-    return (
-      <Col
-        className={
-          (!!props.today ? "border border-dark font-weight-bold" : "") +
-          (!!props.anotherMonth ? " text-muted" : "")
-        }
-        style={{
-          padding: "0.5em",
-          backgroundColor: "#d4edda",
-        }}>
-        {props.children}
-      </Col>
-    );
-  };
+  function getMonth(data: Day[]): JSX.Element {
+    const start = 0;
+    const end = Math.ceil(data.length / 7) - 1;
+    const range = Array(end - start + 1)
+      .fill(0)
+      .map((_, idx) => start + idx);
 
-  function getMonth(timeSpan: Day[]): JSX.Element {
     return (
       <>
-        <h3 className='pt-2'>Maj</h3>
+        <h3 className='pt-2'>Månad</h3>
         <Container className='small'>
-          <Row className=''>
-            <Col className='p-0'>Mån</Col>
-            <Col className='p-0'>Tis</Col>
-            <Col className='p-0'>Ons</Col>
-            <Col className='p-0'>Tor</Col>
-            <Col className='p-0'>Fre</Col>
-            <Col className='p-0'>Lör</Col>
-            <Col className='p-0'>Sön</Col>
-          </Row>
-          <Row>
-            <ColRed anotherMonth>27</ColRed>
-            <ColRed anotherMonth>28</ColRed>
-            <ColRed anotherMonth>29</ColRed>
-            <ColGreen anotherMonth>30</ColGreen>
-            <ColGreen today>1</ColGreen>
-            <ColGreen>2</ColGreen>
-            <ColGreen>3</ColGreen>
-          </Row>
-          <Row>
-            <ColGreen>4</ColGreen>
-            <ColGreen>5</ColGreen>
-            <ColGreen>6</ColGreen>
-            <ColRed>7</ColRed>
-            <ColRed>8</ColRed>
-            <ColRed>9</ColRed>
-            <ColRed>10</ColRed>
-          </Row>
+          {range.map((weekNo) => {
+            return (
+              <Row key={`week-${weekNo}`}>
+                {data
+                  .filter((day) => day.weekInMonth === weekNo)
+                  .map((day, idx) => {
+                    return (
+                      <DayCol
+                        key={`day-${idx}`}
+                        childFree={day.isChildfree}
+                        today={day.isToday}
+                        selected={day.isSelected}
+                        anotherMonth={day.isAnotherMonth}>
+                        {day.date.getDate().toString()}
+                      </DayCol>
+                    );
+                  })}
+              </Row>
+            );
+          })}
         </Container>
       </>
     );
@@ -140,8 +135,8 @@ function MainView(props: MainViewProps) {
           {getHeader(evalDate)}
         </Col>
         <Col xs={12} sm={7}>
-          {getList(isChildFreeWeek(evalDate, todayDate, props.settings))}
-          {/* {getMonth(isChildFreeWeek(evalDate, todayDate, props.settings))} */}
+          {/* {getList(isChildFreeWeek(evalDate, todayDate, props.settings))} */}
+          {getMonth(isChildFreeMonth(evalDate, todayDate, props.settings))}
         </Col>
       </Row>
     </Container>
