@@ -10,7 +10,7 @@ const Navigation: React.FC<NavigationProps> = (props) => {
       <LinkContainer to='/'>
         <Navbar.Brand>Barnfri?</Navbar.Brand>
       </LinkContainer>
-      <div className='d-none d-sm-flex'>{props.children}</div>
+      {/* <div className='d-none d-sm-flex'>{props.children}</div> */}
       <Nav>
         <LinkContainer to='/settings'>
           <Nav.Link>Inställningar</Nav.Link>

@@ -41,12 +41,12 @@ function App() {
     <div className='App'>
       <BrowserRouter>
         <Navigation>
-          <DatePicker
+          {/* <DatePicker
             evalDate={evalDate}
             onChange={handleChange}
             onSteps={handleSteps}
             onReset={() => setEvalDate(new MyDate())}
-          />
+          /> */}
         </Navigation>
 
         <Switch>
@@ -65,15 +65,16 @@ function App() {
                   settings={settings}
                   onChange={handleChange}
                   onSteps={handleSteps}
+                  onReset={() => setEvalDate(new MyDate())}
                 />
-                <Toolbar>
+                {/* <Toolbar>
                   <DatePicker
                     evalDate={evalDate}
                     onChange={handleChange}
                     onSteps={handleSteps}
                     onReset={() => setEvalDate(new MyDate())}
                   />
-                </Toolbar>
+                </Toolbar> */}
               </>
             )}
           />

@@ -1,5 +1,13 @@
 import React from "react";
-import { Nav, FormControl, InputGroup, Button } from "react-bootstrap";
+import {
+  Nav,
+  FormControl,
+  InputGroup,
+  Button,
+  Container,
+  Row,
+  Col,
+} from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 
 interface DatePickerProps {
@@ -13,42 +21,39 @@ function DatePicker(props: DatePickerProps) {
   const year = props.evalDate.getFullYear();
   const month = props.evalDate.getMonth();
   const day = props.evalDate.getDate();
-  console.log(`${year}-${month}-${day}`);
+  const gray = "#e2e3e5";
+
   return (
-    <>
-      <Nav className='p-1'>
-        <Button variant='secondary' onClick={props.onReset}>
-          Idag
-        </Button>
-      </Nav>
-      <Nav className='p-1'>
-        <InputGroup className='flex-nowrap'>
-          <InputGroup.Prepend>
-            <Button
-              id='decrease'
-              variant='secondary'
-              onClick={() => props.onSteps(-1)}>
-              ◄
-            </Button>
-          </InputGroup.Prepend>
+    <Container>
+      <Row className='justify-content-center align-items-center'>
+        <Col xs={"6"} sm={"8"} className='p-1'>
           <FormControl
-            className='text-center'
-            type='date'
+            className='text-center p-0'
+            type='text'
+            disabled
             value={props.evalDate.toLocaleDateString("sv-SE")}
             onChange={props.onChange}
-            style={{ minWidth: "auto", maxWidth: "11em" }}
           />
-          <InputGroup.Append>
-            <Button
-              id='increase'
-              variant='secondary'
-              onClick={() => props.onSteps(+1)}>
-              ►
-            </Button>
-          </InputGroup.Append>
-        </InputGroup>
-      </Nav>
-    </>
+        </Col>
+        <Col xs={"auto"} className='p-1'>
+          <Button
+            id='decrease'
+            variant='secondary'
+            onClick={() => props.onSteps(-1)}>
+            ◄
+          </Button>{" "}
+          <Button variant='secondary' onClick={props.onReset}>
+            Idag
+          </Button>{" "}
+          <Button
+            id='increase'
+            variant='secondary'
+            onClick={() => props.onSteps(+1)}>
+            ►
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
