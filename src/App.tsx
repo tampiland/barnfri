@@ -64,6 +64,7 @@ function App() {
                   evalDate={evalDate}
                   settings={settings}
                   onChange={handleChange}
+                  onSteps={handleSteps}
                 />
                 <Toolbar>
                   <DatePicker

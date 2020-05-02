@@ -8,6 +8,7 @@ interface MainViewProps {
   evalDate: MyDate;
   settings: SettingsObject;
   onChange: (event: any) => void;
+  onSteps: (steps: number) => void;
 }
 
 function MainView(props: MainViewProps) {
@@ -77,9 +78,37 @@ function MainView(props: MainViewProps) {
       .fill(0)
       .map((_, idx) => start + idx);
 
+    const gray = "#e2e3e5";
+
     return (
       <Container className='mt-1 mb-1'>
-        <h3>{props.evalDate.toMonthString()}</h3>
+        <Row
+          className='justify-content-center'
+          onTouchMove={() => {
+            console.log("touch");
+          }}>
+          <Col xs={3}>
+            <Button
+              variant='secondary'
+              className='border-0 font-weight-bold text-secondary'
+              onClick={() => props.onSteps(-1)}
+              style={{ background: gray }}>
+              {"◄"}
+            </Button>
+          </Col>
+          <Col xs={6}>
+            <h3>{props.evalDate.toMonthString()}</h3>
+          </Col>
+          <Col xs={3}>
+            <Button
+              variant='secondary'
+              className='border-0 font-weight-bold text-secondary'
+              onClick={() => props.onSteps(+1)}
+              style={{ background: gray }}>
+              {"►"}
+            </Button>
+          </Col>
+        </Row>
         <Row>
           <DayCol title>M</DayCol>
           <DayCol title>T</DayCol>

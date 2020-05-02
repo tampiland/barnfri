@@ -62,15 +62,11 @@ export function isChildFreeMonth(
   // (monday of the week determined by the first day of the month)
   const firstDate = new MyDate(year, month, 1);
   const offsetLower = -firstDate.getWeekday();
-  //const startDate = new MyDate(year, month, 1 + offsetLower);
-  //console.log(startDate);
 
   // figure out end date
   // (sunday of the week determined by the last day of the month)
   const lastDate = new MyDate(year, month + 1, 0);
   const offsetUpper = 6 - lastDate.getWeekday();
-  //const endDate = new MyDate(year, month + 1, 0 + offsetUpper);
-  //console.log(endDate);
 
   // generate array of MyDates from start to end
   const start = 1 + offsetLower;
