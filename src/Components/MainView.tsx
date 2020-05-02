@@ -82,11 +82,7 @@ function MainView(props: MainViewProps) {
 
     return (
       <Container className='mt-1 mb-1'>
-        <Row
-          className='justify-content-center'
-          onTouchMove={() => {
-            console.log("touch");
-          }}>
+        <Row className='justify-content-center'>
           <Col xs={3}>
             <Button
               variant='secondary'

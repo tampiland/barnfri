@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, FormControl, Button } from "react-bootstrap";
+import { Nav, FormControl, InputGroup, Button } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 
 interface DatePickerProps {
@@ -10,6 +10,10 @@ interface DatePickerProps {
 }
 
 function DatePicker(props: DatePickerProps) {
+  const year = props.evalDate.getFullYear();
+  const month = props.evalDate.getMonth();
+  const day = props.evalDate.getDate();
+  console.log(`${year}-${month}-${day}`);
   return (
     <>
       <Nav className='p-1'>
@@ -18,30 +22,31 @@ function DatePicker(props: DatePickerProps) {
         </Button>
       </Nav>
       <Nav className='p-1'>
-        {/* <InputGroup size='lg' className='flex-nowrap'>
+        <InputGroup className='flex-nowrap'>
           <InputGroup.Prepend>
             <Button
               id='decrease'
               variant='secondary'
               onClick={() => props.onSteps(-1)}>
-              −
+              ◄
             </Button>
-          </InputGroup.Prepend> */}
-        <FormControl
-          type='date'
-          value={props.evalDate.toLocaleDateString()}
-          onChange={props.onChange}
-          style={{ minWidth: "auto", maxWidth: "11em" }}
-        />
-        {/* <InputGroup.Append>
+          </InputGroup.Prepend>
+          <FormControl
+            className='text-center'
+            type='date'
+            value={props.evalDate.toLocaleDateString("sv-SE")}
+            onChange={props.onChange}
+            style={{ minWidth: "auto", maxWidth: "11em" }}
+          />
+          <InputGroup.Append>
             <Button
               id='increase'
               variant='secondary'
               onClick={() => props.onSteps(+1)}>
-              +
+              ►
             </Button>
           </InputGroup.Append>
-        </InputGroup> */}
+        </InputGroup>
       </Nav>
     </>
   );
