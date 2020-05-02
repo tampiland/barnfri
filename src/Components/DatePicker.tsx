@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Nav,
-  FormControl,
-  InputGroup,
-  Button,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { FormControl, Button, Container, Row, Col } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 
 interface DatePickerProps {
@@ -18,10 +10,7 @@ interface DatePickerProps {
 }
 
 function DatePicker(props: DatePickerProps) {
-  const year = props.evalDate.getFullYear();
-  const month = props.evalDate.getMonth();
-  const day = props.evalDate.getDate();
-  const gray = "#e2e3e5";
+  //const gray = "#e2e3e5";
 
   return (
     <Container>

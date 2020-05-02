@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Col, Row, Alert, Button } from "react-bootstrap";
+import { Container, Col, Row, Alert } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 import { SettingsObject } from "../Modules/SettingsObject";
 import { isChildfree, isChildFreeMonth } from "../Modules/ChildFree";
@@ -34,38 +34,6 @@ function MainView(props: MainViewProps) {
       </Alert>
     );
   }
-
-  // function getControls(): JSX.Element {
-  //   const gray = "#e2e3e5";
-
-  //   return (
-  //     <Container>
-  //       <Row className='justify-content-center'>
-  //         <Col xs={3}>
-  //           <Button
-  //             variant='secondary'
-  //             className='border-0 font-weight-bold text-secondary'
-  //             onClick={() => props.onSteps(-1)}
-  //             style={{ background: gray }}>
-  //             {"◄"}
-  //           </Button>
-  //         </Col>
-  //         <Col xs={6}>
-  //           <h3>{props.evalDate.toMonthString()}</h3>
-  //         </Col>
-  //         <Col xs={3}>
-  //           <Button
-  //             variant='secondary'
-  //             className='border-0 font-weight-bold text-secondary'
-  //             onClick={() => props.onSteps(+1)}
-  //             style={{ background: gray }}>
-  //             {"►"}
-  //           </Button>
-  //         </Col>
-  //       </Row>
-  //     </Container>
-  //   );
-  // }
 
   function getMonthView(): JSX.Element {
     const data = isChildFreeMonth(evalDate, todayDate, props.settings);
@@ -124,7 +92,6 @@ function MainView(props: MainViewProps) {
             onSteps={props.onSteps}
             onReset={props.onReset}
           />
-          {/* {getControls()} */}
         </Col>
         <Col xs={12} sm={7}>
           {getMonthView()}
