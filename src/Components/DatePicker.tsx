@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import MyDate from "../Modules/MyDate";
 
 interface DatePickerProps {
