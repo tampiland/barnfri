@@ -37,6 +37,10 @@ function MainView(props: MainViewProps) {
 
   function getMonthView(): JSX.Element {
     const data = isChildFreeMonth(evalDate, todayDate, props.settings);
+    // const data = useMemo(
+    //   () => isChildFreeMonth(evalDate, todayDate, props.settings),
+    //   [evalDate, todayDate, props.settings]
+    // );
 
     const start = 0;
     const end = Math.ceil(data.length / 7) - 1;
@@ -63,7 +67,7 @@ function MainView(props: MainViewProps) {
                 .map((day, idx) => {
                   return (
                     <DayCol
-                      key={`day-${idx}`}
+                      key={day.date.toLocaleDateString("sv-SE")}
                       childFree={day.isChildfree}
                       today={day.isToday}
                       selected={day.isSelected}
